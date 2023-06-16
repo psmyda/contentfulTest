@@ -6,9 +6,12 @@ class ContentfulService {
         space: "q0fnx0gj00da"
     });
 
-    getEntries = async (query: any) => {
-        const response = await this.contentfulClientApi.getEntries(query);
-        console.log(response);
+    getEntries = async () => {
+        const response = await this.contentfulClientApi.getEntries({
+            content_type: "accordion",
+            include: 2
+        });
+
         return response.items[0].fields;
     }
 }

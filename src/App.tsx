@@ -3,20 +3,24 @@ import './App.css';
 import QuestionsList from './components/QuestionsList';
 import Question from "./models/question";
 import contentfulService from "./services/contentful";
+import AccordionSkeleton from "./components/AccordionSkeleton";
 
 function App() {
     const [questions, setQuestions] = React.useState<Question[]>([]);
+    const[title, setTitle] = React.useState<string>("");
+    const[isLoading, setLoading] = React.useState<boolean>(false);
 
     useEffect(() => {
+        setLoading(true)
         loadQuestions();
+
     }, []);
 
     const loadQuestions = async () => {
-        const response = await contentfulService.getEntries({
-            content_type: "accordion",
-            include: 2,
-        });
+        const response = await contentfulService.getEntries();
         const accordionItems= response['accordionItems'] ?? [];
+
+        setTitle(response["title"]?.toString() ?? "");
 
         // @ts-ignore
         setQuestions(accordionItems.map((item: any) => {
@@ -27,12 +31,15 @@ function App() {
                 internalTitle: item.fields.internalTitle
             }
         }));
+
+        setLoading(false)
     }
 
     return (
     <div className="App">
         <div className="container">
-          <QuestionsList items={questions} />
+            {isLoading && <AccordionSkeleton /> }
+            {!isLoading && <QuestionsList items={questions} title={title} />}
         </div>
     </div>
   );
