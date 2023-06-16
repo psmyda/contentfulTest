@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import contentfulApi from "../services/contentful-api";
+import contentfulApi from "../services/contentful";
 import {EntryCollection} from "contentful";
 import Question from "../models/question";
 import QuestionAccordion from "./QuestionAccordion";
