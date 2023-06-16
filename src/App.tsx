@@ -1,24 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import QuestionsList from './components/QuestionsList';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <div className="container">
+          <QuestionsList items={[{id: "1", title: "Test", text: "Test dummy text 1", internalTitle: "int"},
+              {id: "2", title: "Test2", text: "Test dummy text 2", internalTitle: "int2"}]} />
+        </div>
     </div>
   );
 }
